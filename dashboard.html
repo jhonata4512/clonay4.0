@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial- scale=1.0" /> 
+  <title>Clonay 2.0</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      margin: 0;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(180deg, #3f87f5, #b030f4);
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar h2 {
+      text-align: center;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .sidebar li:hover {
+      text-decoration: underline;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+    button {
+      padding: 10px 15px;
+      background: #3f87f5;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <h2>Clonay</h2>
+      <ul>
+        <li onclick="showSection('clonar')">Clonar Site</li>
+        <li onclick="showSection('editor')">Editor Visual</li>
+        <li onclick="showSection('salvos')">Meus Sites</li>
+        <li onclick="showSection('upload')">Importar HTML</li>
+        <li onclick="showSection('ia')">IA Otimizador</li>
+        <li onclick="showSection('componentes')">Componentes</li>
+        <li onclick="showSection('geradores')">Geradores</li>
+      </ul>
+    </div>
+    <div>
+      <li onclick="showSection('minhaConta')">Minha Conta</li>
+    </div>
+  </div>
+
+  <div class="content">
+    <div id="clonar" class="section active">
+      <h3>Clonar Site</h3>
+      <input id="urlInput" type="text" placeholder="https://exemplo.com">
+      <button onclick="clonarSite()">Clonar</button>
+      <button onclick="editarSite()">Editar Site</button>
+      <div id="clonarResult"></div>
+    </div>
+
+    <div id="editor" class="section">
+      <h3>Editor Visual</h3>
+      <p>Aqui você poderá editar o conteúdo visual do seu site.</p>
+    </div>
+
+    <div id="salvos" class="section">
+      <h3>Meus Sites</h3>
+      <ul id="listaSites"></ul>
+    </div>
+
+    <div id="upload" class="section">
+      <h3>Importar HTML</h3>
+      <p>Funcionalidade de upload ainda em desenvolvimento.</p>
+    </div>
+
+    <div id="ia" class="section">
+      <h3>IA Otimizador</h3>
+      <p>Recomendações automáticas virão em breve!</p>
+    </div>
+
+    <div id="componentes" class="section">
+      <h3>Componentes</h3>
+      <p>Adicione blocos prontos ao seu site.</p>
+    </div>
+
+    <div id="geradores" class="section">
+      <h3>Geradores</h3>
+      <p>Geração de conteúdo automático com IA.</p>
+    </div>
+
+    <div id="minhaConta" class="section">
+      <h3>Minha Conta</h3>
+      <img src="https://via.placeholder.com/100" alt="Foto de Perfil" class="profile-photo">
+      <label>Nome</label>
+      <input type="text" value="Jhon Melo" />
+
+      <label>Email</label>
+      <input type="email" value="jhon@email.com" />
+
+      <label>Número de Celular</label>
+      <input type="text" value="(11) 99999-9999" />
+
+      <label>Senha Atual</label>
+      <input type="password" placeholder="Senha atual" />
+
+      <label>Nova Senha</label>
+      <input type="password" placeholder="Nova senha" />
+
+      <label>Confirmar Nova Senha</label>
+      <input type="password" placeholder="Confirmar nova senha" />
+
+      <button>Salvar Alterações</button>
+      <button style="background: #f44336;">Excluir Conta</button>
+      <button style="background: #888;">Sair da Conta</button>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function clonarSite() {
+      const url = document.getElementById('urlInput').value;
+      const result = document.getElementById('clonarResult');
+      if (!url) {
+        result.innerHTML = '<p style="color:red;">Insira uma URL válida!</p>';
+        return;
+      }
+      result.innerHTML = <p>Site <strong>${url}</strong> clonado com sucesso (simulação).</p>;
+      const lista = document.getElementById('listaSites');
+      const li = document.createElement('li');
+      li.innerText = url;
+      lista.appendChild(li);
+    }
+
+    function editarSite() {
+      showSection('editor');
+      document.querySelector('#editor').innerHTML += <p>Editando site agora...</p>;
+    }
+  </script>
+</body>
+</html>
