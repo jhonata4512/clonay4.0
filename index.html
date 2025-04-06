@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clonay | Entrar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #3f87f5, #b030f4);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #3f87f5, #b030f4);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .link {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .link a {
+      color: #3f87f5;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="loginContainer">
+    <h2>Entrar na Clonay</h2>
+    <input id="loginEmail" type="email" placeholder="E-mail" />
+    <input id="loginSenha" type="password" placeholder="Senha" />
+    <button onclick="logarUsuario()">Entrar</button>
+    <div class="link">
+      <p>Não tem uma conta? <a href="#" onclick="mostrarCadastro()">Criar conta</a></p>
+    </div>
+  </div>
+
+  <div class="container" id="cadastroContainer" style="display:none">
+    <h2>Criar Conta na Clonay</h2>
+    <input id="cadastroEmail" type="email" placeholder="E-mail" />
+    <input id="cadastroSenha" type="password" placeholder="Senha" />
+    <button onclick="cadastrarUsuario()">Cadastrar</button>
+    <div class="link">
+      <p>Já tem uma conta? <a href="#" onclick="mostrarLogin()">Entrar</a></p>
+    </div>
+  </div>
+
+  <script>
+    function logarUsuario() {
+      const email = document.getElementById("loginEmail").value;
+      const senha = document.getElementById("loginSenha").value;
+
+      const emailSalvo = localStorage.getItem("usuario-email");
+      const senhaSalva = localStorage.getItem("usuario-senha");
+
+      if (email === emailSalvo && senha === senhaSalva) {
+        alert("Login realizado com sucesso!");
+        window.location.href = "dashboard.html";
+      } else {
+        alert("E-mail ou senha incorretos!");
+      }
+    }
+
+    function cadastrarUsuario() {
+      const email = document.getElementById("cadastroEmail").value;
+      const senha = document.getElementById("cadastroSenha").value;
+
+      if (email && senha) {
+        localStorage.setItem("usuario-email", email);
+        localStorage.setItem("usuario-senha", senha);
+        alert("Conta criada com sucesso!");
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Preencha todos os campos!");
+      }
+    }
+
+    function mostrarCadastro() {
+      document.getElementById("loginContainer").style.display = "none";
+      document.getElementById("cadastroContainer").style.display = "block";
+    }
+
+    function mostrarLogin() {
+      document.getElementById("cadastroContainer").style.display = "none";
+      document.getElementById("loginContainer").style.display = "block";
+    }
+  </script>
+</body>
+</html>
